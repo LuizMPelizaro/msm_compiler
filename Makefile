@@ -1,13 +1,8 @@
-PROG = MSM
+comp: comp_flex
+	gcc lex.yy.c -lfl
 
-compilar: clear parser scanner
-	gcc -o ${PROG}.exe ${PROG}.tab.c ${PROG}.yy.c -std=c89 -lfl
-
-parser:
-	bison -d ${PROG}.y
-
-scanner:
-	flex -o ${PROG}.yy.c ${PROG}.lex
+comp_flex: clear
+	flex  msm_lexer.l
 
 clear:
-	rm -f *.exe *.output *.tab.* *.yy.c
+	rm -f lex.yy.c a.out
