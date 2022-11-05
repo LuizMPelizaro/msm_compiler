@@ -6,57 +6,79 @@ FS			(f|F|l|L)
 IS			(u|U|l|L)*
 
 %%
-"algoritimo"    {printf("PALAVRARESERVADA %s", yytext);}
-"var"           {printf("PALAVRARESERVADA %s", yytext);}
-"inicio"        {printf("PALAVRARESERVADA %s", yytext);}
-"fimalgoritimo" {printf("PALAVRARESERVADA %s", yytext);}
+
+"algoritimo"    {printf("PALAVRARESERVADA %s \n", yytext);}
+"var"           {printf("PALAVRARESERVADA %s \n", yytext);}
+"inicio"        {printf("PALAVRARESERVADA %s \n", yytext);}
+"fimalgoritimo" {printf("PALAVRARESERVADA %s \n", yytext);}
+"Leia"          {printf("PALAVRARESERVADA %s \n", yytext);}
 
 
-"se"            {printf("OPERADORCONDICIONAL %s", yytext);}
-"entao"         {printf("OPERADORCONDICIONAL %s", yytext);}
-"senao"         {printf("OPERADORCONDICIONAL %s", yytext);}
-"fimse"         {printf("OPERADORCONDICIONAL %s", yytext);}
-"caso"          {printf("OPERADORCONDICIONAL %s", yytext);}
-"escolha"       {printf("OPERADORCONDICIONAL %s", yytext);}
+"se"            {printf("OPERADORCONDICIONAL %s \n", yytext);}
+"entao"         {printf("OPERADORCONDICIONAL %s \n", yytext);}
+"senao"         {printf("OPERADORCONDICIONAL %s \n", yytext);}
+"fimse"         {printf("OPERADORCONDICIONAL %s \n", yytext);}
+"caso"          {printf("OPERADORCONDICIONAL %s \n", yytext);}
+"escolha"       {printf("OPERADORCONDICIONAL %s \n", yytext);}
 
-"para"            {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"fimpara"         {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"fimescolha"      {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"enquanto"        {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"fimemquanto"     {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"repita"          {printf("ESTRUTURADEREPITICAO %s", yytext);}
-"fimprocedimento" {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"para"            {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"fimpara"         {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"fimescolha"      {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"enquanto"        {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"fimemquanto"     {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"repita"          {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
+"fimprocedimento" {printf("ESTRUTURADEREPITICAO %s \n", yytext);}
 
 
-"escreva"         {printf("IDENTIFICADOR %s", yytext);}
-"escreval"        {printf("IDENTIFICADOR %s", yytext);}
+"Escreva"         {printf("IDENTIFICADOR %s \n", yytext);}
+"Escreval"        {printf("IDENTIFICADOR %s \n", yytext);}
 
-"e"              {printf("OPERADORLOGICO %s", yytext);}
-"ou"             {printf("OPERADORLOGICO %s", yytext);}
-"nao"            {printf("OPERADORLOGICO %s", yytext);}
-"xou"            {printf("OPERADORLOGICO %s", yytext);}
+"e"              {printf("OPERADORLOGICO %s \n", yytext);}
+"ou"             {printf("OPERADORLOGICO %s \n", yytext);}
+"nao"            {printf("OPERADORLOGICO %s \n", yytext);}
+"xou"            {printf("OPERADORLOGICO %s \n", yytext);}
 
-">"              {printf("OPERADORRELACIONAIS %s", yytext);}
-">="             {printf("OPERADORRELACIONAIS %s", yytext);}
-"=="             {printf("OPERADORRELACIONAIS %s", yytext);}
-"<"              {printf("OPERADORRELACIONAIS %s", yytext);}
-"<="             {printf("OPERADORRELACIONAIS %s", yytext);}
+"<-"            {printf("ATRIBUIDOR %s \n", yytext);}
 
-"+"              {printf("OPERADORARITIMETICO %s", yytext);}
-"-"              {printf("OPERADORARITIMETICO %s", yytext);}
-"*"              {printf("OPERADORARITIMETICO %s", yytext);}
-"/"              {printf("OPERADORARITIMETICO %s", yytext);}
-"="              {printf("OPERADORARITIMETICO %s", yytext);}
-"|"              {printf("OPERADORARITIMETICO %s", yytext);}
-","              {printf("OPERADORARITIMETICO %s", yytext);}
+">"              {printf("OPERADORRELACIONAIS %s \n", yytext);}
+">="             {printf("OPERADORRELACIONAIS %s \n", yytext);}
+"=="             {printf("OPERADORRELACIONAIS %s \n", yytext);}
+"<"              {printf("OPERADORRELACIONAIS %s \n", yytext);}
+"<="             {printf("OPERADORRELACIONAIS %s \n", yytext);}
 
-";"              {printf("SIMBOLOESPECIAL %s", yytext);}
-"("              {printf("SIMBOLOESPECIAL %s", yytext);}
-")"              {printf("SIMBOLOESPECIAL %s", yytext);}
+"+"              {printf("OPERADORARITIMETICO %s \n", yytext);}
+"-"              {printf("OPERADORARITIMETICO %s \n", yytext);}
+"*"              {printf("OPERADORARITIMETICO %s \n", yytext);}
+"/"              {printf("OPERADORARITIMETICO %s \n", yytext);}
+"="              {printf("OPERADORARITIMETICO %s \n", yytext);}
+"|"              {printf("OPERADORARITIMETICO %s \n", yytext);}
+","              {printf("OPERADORARITIMETICO %s \n", yytext);}
 
+";"              {printf("SIMBOLOESPECIAL %s \n", yytext);}
+"("              {printf("SIMBOLOESPECIAL %s \n", yytext);}
+")"              {printf("SIMBOLOESPECIAL %s \n", yytext);}
+
+
+[a-zA-Z][a-zA-Z0-9&%$?-]*        {printf("VARIAVEL %s \n", yytext);}
+
+["]([^"\\\n]|\\(.|\n))*["]       {printf("LITERAL %s \n", yytext);}
+
+\-?[0-9]+                        {printf("INTEIRO %s \n", yytext);}
+
+[\t] {}
+[ ] {}
+","
 %%
 
-main (int argc, char **argv)
-{
-    yylex();
-}
+ main( argc, argv )
+ int argc;
+ char **argv;
+ {
+     ++argv, --argc;  /* skip over program name */
+     if ( argc > 0 )
+             yyin = fopen( argv[0], "r" );
+     else
+             yyin = stdin;
+
+     yylex();
+ }
