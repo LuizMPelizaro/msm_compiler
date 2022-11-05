@@ -6,53 +6,53 @@ FS			(f|F|l|L)
 IS			(u|U|l|L)*
 
 %%
-"algoritimo"    {printf("PALAVRARESERVADA");}
-"var"           {printf("PALAVRARESERVADA");}
-"inicio"        {printf("PALAVRARESERVADA");}
-"fimalgoritimo" {printf("PALAVRARESERVADA");}
+"algoritimo"    {printf("PALAVRARESERVADA %s", yytext);}
+"var"           {printf("PALAVRARESERVADA %s", yytext);}
+"inicio"        {printf("PALAVRARESERVADA %s", yytext);}
+"fimalgoritimo" {printf("PALAVRARESERVADA %s", yytext);}
 
 
-"se"            {printf("OPERADORCONDICIONAL");}
-"entao"         {printf("OPERADORCONDICIONAL");}
-"senao"         {printf("OPERADORCONDICIONAL");}
-"fimse"         {printf("OPERADORCONDICIONAL");}
-"caso"          {printf("OPERADORCONDICIONAL");}
-"escolha"       {printf("OPERADORCONDICIONAL");}
+"se"            {printf("OPERADORCONDICIONAL %s", yytext);}
+"entao"         {printf("OPERADORCONDICIONAL %s", yytext);}
+"senao"         {printf("OPERADORCONDICIONAL %s", yytext);}
+"fimse"         {printf("OPERADORCONDICIONAL %s", yytext);}
+"caso"          {printf("OPERADORCONDICIONAL %s", yytext);}
+"escolha"       {printf("OPERADORCONDICIONAL %s", yytext);}
 
-"para"            {printf("ESTRUTURADEREPITICAO");}
-"fimpara"         {printf("ESTRUTURADEREPITICAO");}
-"fimescolha"      {printf("ESTRUTURADEREPITICAO");}
-"enquanto"        {printf("ESTRUTURADEREPITICAO");}
-"fimemquanto"     {printf("ESTRUTURADEREPITICAO");}
-"repita"          {printf("ESTRUTURADEREPITICAO");}
-"fimprocedimento" {printf("ESTRUTURADEREPITICAO");}
+"para"            {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"fimpara"         {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"fimescolha"      {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"enquanto"        {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"fimemquanto"     {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"repita"          {printf("ESTRUTURADEREPITICAO %s", yytext);}
+"fimprocedimento" {printf("ESTRUTURADEREPITICAO %s", yytext);}
 
 
-"escreva"         {printf("IDENTIFICADOR");}
-"escreval"        {printf("IDENTIFICADOR");}
+"escreva"         {printf("IDENTIFICADOR %s", yytext);}
+"escreval"        {printf("IDENTIFICADOR %s", yytext);}
 
-"e"              {printf("OPERADORLOGICO");}
-"ou"             {printf("OPERADORLOGICO");}
-"nao"            {printf("OPERADORLOGICO");}
-"xou"            {printf("OPERADORLOGICO");}
+"e"              {printf("OPERADORLOGICO %s", yytext);}
+"ou"             {printf("OPERADORLOGICO %s", yytext);}
+"nao"            {printf("OPERADORLOGICO %s", yytext);}
+"xou"            {printf("OPERADORLOGICO %s", yytext);}
 
-">"              {printf("OPERADORRELACIONAIS");}
-">="             {printf("OPERADORRELACIONAIS");}
-"=="             {printf("OPERADORRELACIONAIS");}
-"<"              {printf("OPERADORRELACIONAIS");}
-"<="             {printf("OPERADORRELACIONAIS");}
+">"              {printf("OPERADORRELACIONAIS %s", yytext);}
+">="             {printf("OPERADORRELACIONAIS %s", yytext);}
+"=="             {printf("OPERADORRELACIONAIS %s", yytext);}
+"<"              {printf("OPERADORRELACIONAIS %s", yytext);}
+"<="             {printf("OPERADORRELACIONAIS %s", yytext);}
 
-"+"              {printf("OPERADORARITIMETICO");}
-"-"              {printf("OPERADORARITIMETICO");}
-"*"              {printf("OPERADORARITIMETICO");}
-"/"              {printf("OPERADORARITIMETICO");}
-"="              {printf("OPERADORARITIMETICO");}
-"|"              {printf("OPERADORARITIMETICO");}
-","              {printf("OPERADORARITIMETICO");}
+"+"              {printf("OPERADORARITIMETICO %s", yytext);}
+"-"              {printf("OPERADORARITIMETICO %s", yytext);}
+"*"              {printf("OPERADORARITIMETICO %s", yytext);}
+"/"              {printf("OPERADORARITIMETICO %s", yytext);}
+"="              {printf("OPERADORARITIMETICO %s", yytext);}
+"|"              {printf("OPERADORARITIMETICO %s", yytext);}
+","              {printf("OPERADORARITIMETICO %s", yytext);}
 
-";"              {printf("SIMBOLOESPECIAL");}
-"("              {printf("SIMBOLOESPECIAL");}
-")"              {printf("SIMBOLOESPECIAL");}
+";"              {printf("SIMBOLOESPECIAL %s", yytext);}
+"("              {printf("SIMBOLOESPECIAL %s", yytext);}
+")"              {printf("SIMBOLOESPECIAL %s", yytext);}
 
 %%
 
