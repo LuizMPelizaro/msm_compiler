@@ -69,9 +69,9 @@ extern void yylex_destroy();
 
 %%
 
-inicio: declaracao_Algoritmo{ }
+inicio: declaracao_Algoritmo{ printf("SUCESSO\n"); }
 
-declaracao_Algoritmo: ALGORITMO STRING { printf("SUCESSO"); }
+declaracao_Algoritmo: ALGORITMO STRING VAR INICIO FIMALGORITMO{  }
 
 %%
 
@@ -81,11 +81,9 @@ int main(int argc, char** argv){
     if(!f) {
         return (1);
     }
-//    if(yyerror){
-//        yyerror("erro");
-//        return (1);
-//    }
+    yyparse();
     printf("Arquivo reconhecido com sucesso\n");
+    fclose(f);
 }
 
 void yyerror(char* s){
