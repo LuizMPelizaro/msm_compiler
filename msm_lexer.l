@@ -22,9 +22,9 @@ void unexpectedCharacter(char c)
 
 
 [Cc]aracter         {return(CARACTER);}
-[Rr]eal             {return(REAL);}
+[Rr]eal             {return(TIPO_REAL);}
 [Ii]nteiro          {return(INTEIRO);}
-[Ll]ogico           {return(LOGICO);}
+[Ll]ogico           {return(TIPO_LOGICO);}
 
 [Ss]e               {return(SE);}
 [Ee]ntao            {return(ENTAO);}
@@ -51,7 +51,7 @@ ou                  {return(OU);}
 nao                 {return(NAO);}
 xou                 {return(XOU);}
 
-=                   {return(ATRIBUI);}
+=                   {return(ATRIBUIR);}
 
 ">"                 {return(MAIOR);}
 ">="                {return(MAIOR_IGUAL);}
@@ -69,6 +69,7 @@ xou                 {return(XOU);}
 "("                 {return(ABRE_PAR);}
 ")"                 {return(FECHA_PAR);}
 ":"                 {return(DOIS_PONTOS);}
+[Vv]erdadeiro | [Ff]also {return(LOGIGO)}
 
 [a-zA-Z][a-zA-Z0-9&%$?-]*        {return(LITERAL);}
 
@@ -95,13 +96,3 @@ xou                 {return(XOU);}
 
 %%
 
-int main( int argc, char **argv ) {
-     ++argv, --argc;  /* skip over program name */
-     if ( argc > 0 ) {
-        yyin = fopen( argv[0], "r" );
-     } else {
-        yyin = stdin;
-     }
-
-     return yylex();
- }
