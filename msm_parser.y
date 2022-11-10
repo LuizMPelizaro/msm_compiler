@@ -21,8 +21,7 @@ extern void yylex_destroy();
 %token VAR
 %token FIMALGORITMO
 %token LEIA
-%token CARACTERE
-%token REAL
+%token CARACTER
 %token INTEIRO
 %token LOGICO
 %token SE
@@ -35,15 +34,15 @@ extern void yylex_destroy();
 %token FIMPARA
 %token FIMESCOLHA
 %token ENQUANTO
-%token FIM_ENQUANTO
+%token FIMENQUANTO
 %token REPITA
 %token FIMPROCEDIMENTO
 %token ESCREVAL
 %token ESCREVA
-%token LOGICO_E
-%token LOGICO_OU
-%token LOGICO_NAO
-%token LOGICO_OU_EXCLUSIVO
+%token E
+%token OU
+%token NAO
+%token XOU
 %token ATRIBUI
 %token MAIOR
 %token MAIOR_IGUAL
@@ -51,21 +50,20 @@ extern void yylex_destroy();
 %token MENOR
 %token MENOR_IGUAL
 %token DIFERENTE
-%token MAIS
-%token MENOS
-%token MULTIPLICA
-%token DIVIDE
-%token VIRGULA
-%token SEMICOLON
-%token L_PAREN
-%token R_PAREN
-%token L_SQUARE_BRACKET
-%token IDENTIFICADOR
+%token SOMA
+%token SUB
+%token MUL
+%token DIV
+%token VIG
+%token PONTO_VIG
+%token FECHA_PAR
+%token ABRE_PAR
+%token LITERAL
 %token STRING
-%token NUMERO_INTEIRO
 %token DOIS_PONTOS
-%token RETORNE
-%token FACA
+%token NUMERO
+%token REAL
+
 
 %%
 

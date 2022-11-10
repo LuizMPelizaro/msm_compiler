@@ -1,10 +1,12 @@
+%option yylineno
+%x COMMENT
 %{
 #include "msm_parser.tab.h"
 #include <stdio.h>
 
 void unexpectedCharacter(char c)
 {
-    fprintf(stderr, "lexical error, unexpected character '%c' on line %d\n", c, yylineno);
+    printf("unexpected character '%c' on line %d\n", c, yylineno);
     exit(EXIT_FAILURE);
 }
 
@@ -12,123 +14,79 @@ void unexpectedCharacter(char c)
 
 %%
 
-"Algoritmo"    {return(ALGORITMO);}
-"algoritmo"    {return(ALGORITMO);}
-
-"Var"           {return(VAR);}
-"var"           {return(VAR);}
-
-"Inicio"        {return(INICIO);}
-"inicio"        {return(INICIO);}
-
-"Fimalgoritmo"  {return(FIMALGORITMO);}
-"fimalgoritmo"  {return(FIMALGORITMO);}
-
-"Leia"          {return(LEIA);}
-"leia"          {return(LEIA);}
-
-"Caractere"      {return(CARACTERE);}
-"caractere"      {return(CARACTERE);}
-
-"Real"          {return(REAL);}
-"real"          {return(REAL);}
-
-"Inteiro"       {return(INTEIRO);}
-"inteiro"       {return(INTEIRO);}
-
-"Logico"        {return(LOGICO);}
-"logico"        {return(LOGICO);}
+[Aa]lgoritmo        {return(ALGORITMO);}
+[Vv]ar              {return(VAR);}
+[Ii]nicio           {return(INICIO);}
+[Ll]eia             {return(LEIA);}
+[Ff]imalgoritmo     {return(FIMALGORITMO);}
 
 
-"Se"            {return(SE);}
-"se"            {return(SE);}
+[Cc]aracter         {return(CARACTER);}
+[Rr]eal             {return(REAL);}
+[Ii]nteiro          {return(INTEIRO);}
+[Ll]ogico           {return(LOGICO);}
 
-"Entao"         {return(ENTAO);}
-"entao"         {return(ENTAO);}
+[Ss]e               {return(SE);}
+[Ee]ntao            {return(ENTAO);}
+[Ss]enao            {return(SENAO);}
+[Cc]aso             {return(CASO);}
+[Ee]scolha          {return(ESCOLHA);}
 
-"Senao"         {return(SENAO);}
-"senao"         {return(SENAO);}
+[Pp]ara             {return(PARA);}
+[Ee]nquanto         {return(ENQUANTO);}
 
-"Fimse"         {return(FIMSE);}
-"fimse"         {return(FIMSE);}
+[Ff]impara          {return(FIMPARA);}
+[Ff]imescolha       {return(FIMESCOLHA);}
+[Ff]imemquanto      {return(FIMENQUANTO);}
+[Ff]imse            {return(FIMSE);}
+[Ff]impara          {return(FIMPARA);}
+[Ff]imescolha       {return(FIMESCOLHA);}
+[Ff]imemquanto      {return(FIMENQUANTO);}
 
-"Caso"          {return(CASO);}
-"caso"          {return(CASO);}
+[Ee]screva          {return(ESCREVA);}
+[Ee]screval         {return(ESCREVAL);}
 
-"Escolha"       {return(ESCOLHA);}
-"escolha"       {return(ESCOLHA);}
+e                   {return(E);}
+ou                  {return(OU);}
+nao                 {return(NAO);}
+xou                 {return(XOU);}
 
-"Para"            {return(PARA);}
-"para"            {return(PARA);}
+=                   {return(ATRIBUI);}
 
-"fimpara"         {return(FIMPARA);}
-"Fimpara"         {return(FIMPARA);}
+">"                 {return(MAIOR);}
+">="                {return(MAIOR_IGUAL);}
+"=="                {return(IGUAL);}
+"<"                 {return(MENOR);}
+"<="                {return(MENOR_IGUAL);}
 
-"fimescolha"      {return(FIMESCOLHA);}
-"Fimescolha"      {return(FIMESCOLHA);}
+"+"                 {return(SOMA);}
+"-"                 {return(SUB);}
+"*"                 {return(MUL);}
+"/"                 {return(DIV);}
+","                 {return(VIG);}
 
-"Enquanto"        {return(ENQUANTO);}
-"enquanto"        {return(ENQUANTO);}
+";"                 {return(PONTO_VIG);}
+"("                 {return(ABRE_PAR);}
+")"                 {return(FECHA_PAR);}
+":"                 {return(DOIS_PONTOS);}
 
-"fimenquanto"     {return(FIM_ENQUANTO);}
-"Fimenquanto"     {return(FIM_ENQUANTO);}
+[a-zA-Z][a-zA-Z0-9&%$?-]*        {return(LITERAL);}
 
-"Repita"          {return(REPITA);}
-"repita"          {return(REPITA);}
+["]([^"\\\n]|\\(.|\n))*["]       {return(STRING);}
 
-"fimprocedimento" {return(FIMPROCEDIMENTO);}
-"Fimprocedimento" {return(FIMPROCEDIMENTO);}
+\-?[0-9]+                        {return(NUMERO);}
 
-"Escreval"        {return(ESCREVAL);}
-"escreval"        {return(ESCREVAL);}
+\-?[0-9]+\.[0-9]+                {return(REAL);}
+\-?[0-9]+\.[0-9]+\E\-?[0-9]+     {return(REAL);}
 
-"Escreva"         {return(ESCREVA);}
-"escreva"         {return(ESCREVA);}
+[ \t\v\n\f]		 { }
 
-":"              {return(DOIS_PONTOS);}
+"/*"                   { BEGIN(COMMENT); }
+<COMMENT>"*/"          { BEGIN(INITIAL); }
+<COMMENT>([^*]|\n)+|.  { }
+<COMMENT><<EOF>>       { }
 
-"e"              {return(LOGICO_E);}
-"ou"             {return(LOGICO_OU);}
-"nao"            {return(LOGICO_NAO);}
-"xou"            {return(LOGICO_OU_EXCLUSIVO);}
-
-"<-"             {return(ATRIBUI);}
-"="              {return(ATRIBUI);}
-
-">"              {return(MAIOR);}
-">="             {return(MAIOR_IGUAL);}
-"=="             {return(IGUAL);}
-"<"              {return(MENOR);}
-"<="             {return(MENOR_IGUAL);}
-"=/="            {return(DIFERENTE);}
-
-"+"              {return(MAIS);}
-"-"              {return(MENOS);}
-"*"              {return(MULTIPLICA);}
-"/"              {return(DIVIDE);}
-
-","              {return(VIRGULA);}
-";"              {return(SEMICOLON);}
-
-"("              {return(L_PAREN);}
-")"              {return(R_PAREN);}
-
-"["              {return(L_SQUARE_BRACKET);}
-"]"              {return(L_SQUARE_BRACKET);}
-
-"faca"           {return(FACA);}
-"Faca"           {return(FACA);}
-
-"retorne"        {return(RETORNE);}
-"Retorne"        {return(RETORNE);}
-
-
-[a-zA-Z][a-zA-Z0-9&%$?-]*   {return(IDENTIFICADOR);}
-
-\"([^\\\"]|\\.)*\"	        {return(STRING);}
-
-\-?[0-9]+                   {return(NUMERO_INTEIRO);}
-
+"//".*\n {}
 
 " "		{ }
 "\t"        {}
@@ -136,3 +94,14 @@ void unexpectedCharacter(char c)
 "\n"		{}
 
 %%
+
+int main( int argc, char **argv ) {
+     ++argv, --argc;  /* skip over program name */
+     if ( argc > 0 ) {
+        yyin = fopen( argv[0], "r" );
+     } else {
+        yyin = stdin;
+     }
+
+     return yylex();
+ }
