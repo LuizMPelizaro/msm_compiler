@@ -92,8 +92,8 @@ variaveis:
 
 assinatura_operador:
         | ATRIBUIR
-        |MAIOR
-        |MAIOR_IGUAL
+        | MAIOR
+        | MAIOR_IGUAL
         | IGUAL
         | MENOR
         | MENOR_IGUAL
@@ -103,6 +103,7 @@ assinatura_operador:
         | MUL
         | DIV
         ;
+
 tipo_atribuir:
         | REAL
         | STRING
@@ -116,13 +117,49 @@ palavras:
         ;
 
 comando_se:
-        | SE palavras assinatura_operador ENTAO
+	| instrucoes SE expressao_logica ENTAO instrucoes FIMSE
+        | SE expressao_logica ENTAO instrucoes alternativa FIMSE
+	;
+
+alternativa:
+	| SENAO instrucoes
+	;
 
 instrucoes: 
-        | instrucoes nome_var assinatura_operador tipo_atribuir 
-        | instrucoes ESCREVA ABRE_PAR palavras FECHA_PAR
-        | instrucoes ESCREVAL ABRE_PAR palavras FECHA_PAR
+        | escreval
+        | escreva
+        | leia
+        | comando_se
         ;
+
+escreval:
+	| ESCREVAL ABRE_PAR STRING FECHA_PAR
+	;
+
+escreva:
+	| ESCREVA ABRE_PAR STRING FECHA_PAR
+	;
+
+leia:
+	| LEIA ABRE_PAR FECHA_PAR
+	;
+
+expressao_logica:
+	|expressao IGUAL expressao
+	|expressao MAIOR expressao
+	|expressao MENOR expressao
+	|expressao MAIOR_IGUAL expressao
+	|expressao MENOR_IGUAL expressao
+	|expressao DIFERENTE expressao
+	;
+
+expressao:
+	|expressao SOMA expressao
+	|expressao SUB expressao
+	|expressao MUL expressao
+	|expressao DIV expressao
+	|ABRE_PAR expressao FECHA_PAR
+	;
 
 %%
 

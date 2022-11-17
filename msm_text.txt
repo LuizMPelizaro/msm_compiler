@@ -1,4 +1,10 @@
-algoritimo "ola mundo"
+algoritmo "ola mundo"
+var
+i:inteiro
 inicio
-escreval("Ola mundo!");
+escreval("Ola mundo!")
+i = 10
+se i == 11 entao
+escreval("a")
+fimse
 fimalgoritmo
