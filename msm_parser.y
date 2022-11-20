@@ -193,7 +193,7 @@ expressao:
 %%
 
 int main(int argc, char **argv){
-    yyin = fopen(argv[i], "r");
+    yyin = fopen(argv[1], "r");
 
     if(!yyin) {
         return (1);
