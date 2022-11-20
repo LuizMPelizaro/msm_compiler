@@ -34,6 +34,7 @@ extern void yylex_destroy();
 %token FIMPARA
 %token FIMESCOLHA
 %token ENQUANTO
+%token FACA
 %token FIMENQUANTO
 %token REPITA
 %token FIMPROCEDIMENTO
@@ -121,15 +122,22 @@ comando_se:
         | SE expressao_logica ENTAO instrucoes alternativa FIMSE
 	;
 
+comando_enquanto:
+        | instrucoes ENQUANTO expressao_logica FACA instrucoes FIMENQUANTO
+        ;
+
 alternativa:
 	| SENAO instrucoes
 	;
 
 instrucoes: 
+        | instrucoes nome_var assinatura_operador tipo_atribuir
         | escreval
         | escreva
         | leia
         | comando_se
+        | comando_enquanto
+        | SENAO
         ;
 
 escreval:
@@ -145,7 +153,7 @@ leia:
 	;
 
 expressao_logica:
-	|expressao IGUAL expressao
+	|palavras IGUAL tipo_atribuir
 	|expressao MAIOR expressao
 	|expressao MENOR expressao
 	|expressao MAIOR_IGUAL expressao

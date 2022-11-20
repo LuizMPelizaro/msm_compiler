@@ -34,14 +34,12 @@ void unexpectedCharacter(char c)
 
 [Pp]ara             {return(PARA);}
 [Ee]nquanto         {return(ENQUANTO);}
+[Ff]aca             {return(FACA);}
 
-[Ff]impara          {return(FIMPARA);}
-[Ff]imescolha       {return(FIMESCOLHA);}
-[Ff]imemquanto      {return(FIMENQUANTO);}
 [Ff]imse            {return(FIMSE);}
 [Ff]impara          {return(FIMPARA);}
 [Ff]imescolha       {return(FIMESCOLHA);}
-[Ff]imemquanto      {return(FIMENQUANTO);}
+[Ff]imenquanto      {return(FIMENQUANTO);}
 
 [Ee]screva          {return(ESCREVA);}
 [Ee]screval         {return(ESCREVAL);}
