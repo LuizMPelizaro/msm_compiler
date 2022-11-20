@@ -11,7 +11,7 @@ unsigned int i = 0;
 void yyerror(char* s);
 int yylex();
 extern int yylineno;
-extern FILE* yyin;
+extern FILE *yyin;
 extern void yylex_destroy();
 
 %}
@@ -172,14 +172,14 @@ expressao:
 %%
 
 int main(int argc, char **argv){
-    FILE *f = fopen(argv[i], "r");
+    yyin = fopen(argv[i], "r");
 
-    if(!f) {
+    if(!yyin) {
         return (1);
     }
     yyparse();
     printf("Arquivo reconhecido com sucesso\n");
-    fclose(f);
+    fclose(yyin);
 }
 
 void yyerror(char* s){
