@@ -124,7 +124,23 @@ comando_se:
 
 comando_enquanto:
         | instrucoes ENQUANTO expressao_logica FACA instrucoes FIMENQUANTO
+        | ENQUANTO expressao_logica FACA instrucoes FIMENQUANTO
         ;
+
+comando_para:
+	| instrucoes PARA expressao_logica FACA instrucoes FIMPARA
+	| PARA expressao_logica FACA instrucoes FIMPARA
+	;
+
+//comando_escolha:
+//	| instrucoes ESCOLHA variaveis comando_caso instrucoes FIMESCOLHA
+//	| ESCOLHA variaveis comando_caso instrucoes FIMESCOLHA
+//	;
+//
+//comando_caso:
+//	| instrucoes CASO STRING instrucoes
+//	| CASO STRING instrucoes
+//	;
 
 alternativa:
 	| SENAO instrucoes
@@ -137,23 +153,26 @@ instrucoes:
         | leia
         | comando_se
         | comando_enquanto
-        | SENAO
+//        | comando_para
+//        | comando_escolha
         ;
 
 escreval:
 	| ESCREVAL ABRE_PAR STRING FECHA_PAR
+	| ESCREVAL ABRE_PAR palavras FECHA_PAR
 	;
 
 escreva:
 	| ESCREVA ABRE_PAR STRING FECHA_PAR
+	| ESCREVA ABRE_PAR palavras FECHA_PAR
 	;
 
 leia:
-	| LEIA ABRE_PAR FECHA_PAR
+	| LEIA ABRE_PAR tipo_atribuir FECHA_PAR
 	;
 
 expressao_logica:
-	|palavras IGUAL tipo_atribuir
+	|expressao IGUAL expressao
 	|expressao MAIOR expressao
 	|expressao MENOR expressao
 	|expressao MAIOR_IGUAL expressao
@@ -167,6 +186,8 @@ expressao:
 	|expressao MUL expressao
 	|expressao DIV expressao
 	|ABRE_PAR expressao FECHA_PAR
+	|palavras
+	|tipo_atribuir
 	;
 
 %%
