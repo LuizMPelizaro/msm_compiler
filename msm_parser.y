@@ -28,16 +28,16 @@ extern void yylex_destroy();
 %token ENTAO
 %token SENAO
 %token FIMSE
-%token CASO
-%token ESCOLHA
+
+
 %token PARA
 %token FIMPARA
-%token FIMESCOLHA
+
 %token ENQUANTO
 %token FACA
 %token FIMENQUANTO
-%token REPITA
-%token FIMPROCEDIMENTO
+
+
 %token ESCREVAL
 %token ESCREVA
 %token E
@@ -73,8 +73,7 @@ inicio: declaracao_Algoritmo{ printf("SUCESSO\n"); }
 
 declaracao_Algoritmo: ALGORITMO STRING VAR variaveis INICIO instrucoes FIMALGORITMO{  }
 /*Bloco de variaveis*/
-tipo_var:
-        | CARACTER
+tipo_var: CARACTER
         | TIPO_REAL
         | INTEIRO
         | TIPO_LOGICO
@@ -84,15 +83,13 @@ nome_var: LITERAL
         | nome_var VIG LITERAL
         ;
 
-variaveis:
-        | nome_var DOIS_PONTOS tipo_var
+variaveis:  nome_var DOIS_PONTOS tipo_var
         | variaveis nome_var DOIS_PONTOS tipo_var
         ;
 
 /*Bloco de codigo*/
 
-assinatura_operador:
-        | ATRIBUIR
+assinatura_operador: ATRIBUIR
         | MAIOR
         | MAIOR_IGUAL
         | IGUAL
@@ -103,91 +100,55 @@ assinatura_operador:
         | SUB
         | MUL
         | DIV
+        | E
+        | XOU
+        | OU
+        | NAO
         ;
 
-tipo_atribuir:
-        | REAL
+tipo_atribuir: REAL
         | STRING
         | LOGICO
         | NUMERO
-        ;
-
-palavras:
-        | STRING
         | nome_var
         ;
 
-comando_se:
-	| instrucoes SE expressao_logica ENTAO instrucoes FIMSE
-        | SE expressao_logica ENTAO instrucoes alternativa FIMSE
-	;
-
-comando_enquanto:
-        | instrucoes ENQUANTO expressao_logica FACA instrucoes FIMENQUANTO
-        | ENQUANTO expressao_logica FACA instrucoes FIMENQUANTO
+palavras: nome_var
+        | STRING
+        | REAL
+        | NUMERO
         ;
 
-comando_para:
-	| instrucoes PARA expressao_logica FACA instrucoes FIMPARA
-	| PARA expressao_logica FACA instrucoes FIMPARA
+comando_se:  instrucoes SE expressao ENTAO instrucoes FIMSE
+        | SE expressao ENTAO instrucoes alternativa FIMSE
 	;
 
-//comando_escolha:
-//	| instrucoes ESCOLHA variaveis comando_caso instrucoes FIMESCOLHA
-//	| ESCOLHA variaveis comando_caso instrucoes FIMESCOLHA
-//	;
-//
-//comando_caso:
-//	| instrucoes CASO STRING instrucoes
-//	| CASO STRING instrucoes
-//	;
+comando_enquanto: ENQUANTO expressao FACA instrucoes FIMENQUANTO ;
 
-alternativa:
-	| SENAO instrucoes
+comando_para: instrucoes PARA expressao FACA instrucoes FIMPARA
+	| PARA expressao FACA instrucoes FIMPARA
 	;
 
-instrucoes: 
-        | instrucoes nome_var assinatura_operador tipo_atribuir
+alternativa: SENAO instrucoes;
+
+instrucoes:instrucoes 
+        | nome_var assinatura_operador tipo_atribuir
         | escreval
         | escreva
-        | leia
         | comando_se
         | comando_enquanto
-//        | comando_para
-//        | comando_escolha
+        | comando_para
+        | leia
         ;
 
-escreval:
-	| ESCREVAL ABRE_PAR STRING FECHA_PAR
-	| ESCREVAL ABRE_PAR palavras FECHA_PAR
-	;
+escreval: ESCREVAL ABRE_PAR palavras FECHA_PAR;
 
-escreva:
-	| ESCREVA ABRE_PAR STRING FECHA_PAR
-	| ESCREVA ABRE_PAR palavras FECHA_PAR
-	;
+escreva: ESCREVA ABRE_PAR palavras FECHA_PAR;
 
-leia:
-	| LEIA ABRE_PAR tipo_atribuir FECHA_PAR
-	;
+leia: LEIA ABRE_PAR nome_var FECHA_PAR;
 
-expressao_logica:
-	|expressao IGUAL expressao
-	|expressao MAIOR expressao
-	|expressao MENOR expressao
-	|expressao MAIOR_IGUAL expressao
-	|expressao MENOR_IGUAL expressao
-	|expressao DIFERENTE expressao
-	;
-
-expressao:
-	|expressao SOMA expressao
-	|expressao SUB expressao
-	|expressao MUL expressao
-	|expressao DIV expressao
-	|ABRE_PAR expressao FECHA_PAR
-	|palavras
-	|tipo_atribuir
+expressao:  palavras assinatura_operador palavras
+	|expressao assinatura_operador palavras
 	;
 
 %%

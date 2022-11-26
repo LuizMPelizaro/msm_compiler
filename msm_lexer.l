@@ -29,8 +29,7 @@ void unexpectedCharacter(char c)
 [Ss]e               {return(SE);}
 [Ee]ntao            {return(ENTAO);}
 [Ss]enao            {return(SENAO);}
-[Cc]aso             {return(CASO);}
-[Ee]scolha          {return(ESCOLHA);}
+
 
 [Pp]ara             {return(PARA);}
 [Ee]nquanto         {return(ENQUANTO);}
@@ -38,7 +37,7 @@ void unexpectedCharacter(char c)
 
 [Ff]imse            {return(FIMSE);}
 [Ff]impara          {return(FIMPARA);}
-[Ff]imescolha       {return(FIMESCOLHA);}
+
 [Ff]imenquanto      {return(FIMENQUANTO);}
 
 [Ee]screva          {return(ESCREVA);}
