@@ -87,7 +87,7 @@ variaveis: nome_var DOIS_PONTOS tipo_var
 /*Bloco de codigo*/
 
 instrucoes:
-        |  instrucoes nome_var assinatura_operador tipo_atribuir
+        |  instrucoes nome_var assinatura_operador expressao
         |  expressao
         |  instrucoes nome_var assinatura_operador expressao
         |  escreval
@@ -130,7 +130,6 @@ assinatura_operador: ATRIBUIR
         ;
 
 tipo_atribuir: REAL
-        | STRING
         | LOGICO
         | NUMERO
         | nome_var
@@ -138,26 +137,18 @@ tipo_atribuir: REAL
 
 palavras: nome_var
         | STRING
-        | REAL
-        | NUMERO
         ;
 
-teste: palavras assinatura_operador teste
-       | palavras
-       ;
+alternativa:
+	|SENAO instrucoes;
 
-alternativa: SENAO instrucoes;
-
-comando_se:  instrucoes SE expressao ENTAO instrucoes FIMSE
-             | SE expressao ENTAO instrucoes FIMSE
-             | SE expressao ENTAO instrucoes alternativa FIMSE
-	           ;
+comando_se:  instrucoes SE expressao ENTAO instrucoes alternativa FIMSE
+	    ;
 
 comando_enquanto: ENQUANTO expressao FACA instrucoes FIMENQUANTO ;
 
-comando_para: instrucoes PARA expressao DE palavras ATE palavras FACA instrucoes FIMPARA
-	            | PARA expressao DE palavras ATE palavras FACA instrucoes FIMPARA
-	            ;
+comando_para: instrucoes PARA expressao DE tipo_atribuir ATE tipo_atribuir FACA instrucoes FIMPARA
+	     ;
 
 %%
 
