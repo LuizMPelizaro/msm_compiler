@@ -28,16 +28,13 @@ extern void yylex_destroy();
 %token ENTAO
 %token SENAO
 %token FIMSE
-
-
 %token PARA
+%token DE
+%token ATE
 %token FIMPARA
-
 %token ENQUANTO
 %token FACA
 %token FIMENQUANTO
-
-
 %token ESCREVAL
 %token ESCREVA
 %token E
@@ -83,11 +80,37 @@ nome_var: LITERAL
         | nome_var VIG LITERAL
         ;
 
-variaveis:  nome_var DOIS_PONTOS tipo_var
+variaveis: nome_var DOIS_PONTOS tipo_var
         | variaveis nome_var DOIS_PONTOS tipo_var
         ;
 
 /*Bloco de codigo*/
+
+instrucoes:
+        |  instrucoes nome_var assinatura_operador tipo_atribuir
+        |  expressao
+        |  instrucoes nome_var assinatura_operador expressao
+        |  escreval
+        |  escreva
+        |  comando_se
+        |  comando_enquanto
+        |  comando_para
+        |  leia
+        ;
+
+escreval: instrucoes ESCREVAL ABRE_PAR palavras FECHA_PAR
+          | instrucoes ESCREVAL ABRE_PAR palavras VIG palavras FECHA_PAR
+          ;
+
+escreva: instrucoes ESCREVA ABRE_PAR palavras FECHA_PAR ;
+
+leia: instrucoes LEIA ABRE_PAR nome_var FECHA_PAR;
+
+expressao: expressao assinatura_operador expressao
+    |ABRE_PAR expressao FECHA_PAR
+    |palavras
+    |tipo_atribuir
+    ;
 
 assinatura_operador: ATRIBUIR
         | MAIOR
@@ -119,37 +142,22 @@ palavras: nome_var
         | NUMERO
         ;
 
-comando_se:  instrucoes SE expressao ENTAO instrucoes FIMSE
-        | SE expressao ENTAO instrucoes alternativa FIMSE
-	;
-
-comando_enquanto: ENQUANTO expressao FACA instrucoes FIMENQUANTO ;
-
-comando_para: instrucoes PARA expressao FACA instrucoes FIMPARA
-	| PARA expressao FACA instrucoes FIMPARA
-	;
+teste: palavras assinatura_operador teste
+       | palavras
+       ;
 
 alternativa: SENAO instrucoes;
 
-instrucoes:instrucoes 
-        |  nome_var assinatura_operador tipo_atribuir
-        |  escreval
-        |  escreva
-        |  comando_se
-        |  comando_enquanto
-        |  comando_para
-        |  leia
-        ;
+comando_se:  instrucoes SE expressao ENTAO instrucoes FIMSE
+             | SE expressao ENTAO instrucoes FIMSE
+             | SE expressao ENTAO instrucoes alternativa FIMSE
+	           ;
 
-escreval: ESCREVAL ABRE_PAR palavras FECHA_PAR instrucoes;
+comando_enquanto: ENQUANTO expressao FACA instrucoes FIMENQUANTO ;
 
-escreva: ESCREVA ABRE_PAR palavras FECHA_PAR instrucoes;
-
-leia: LEIA ABRE_PAR nome_var FECHA_PAR instrucoes;
-
-expressao:  palavras assinatura_operador palavras
-	|expressao assinatura_operador palavras
-	;
+comando_para: instrucoes PARA expressao DE palavras ATE palavras FACA instrucoes FIMPARA
+	            | PARA expressao DE palavras ATE palavras FACA instrucoes FIMPARA
+	            ;
 
 %%
 

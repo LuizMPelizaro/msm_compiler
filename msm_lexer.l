@@ -32,6 +32,8 @@ void unexpectedCharacter(char c)
 
 
 [Pp]ara             {return(PARA);}
+[Dd]e               {return(DE);}
+[Aa]te               {return(ATE);}
 [Ee]nquanto         {return(ENQUANTO);}
 [Ff]aca             {return(FACA);}
 
@@ -68,7 +70,7 @@ xou                 {return(XOU);}
 ":"                 {return(DOIS_PONTOS);}
 [Vv]erdadeiro | [Ff]also {return(LOGIGO)}
 
-[a-zA-Z][a-zA-Z0-9&%$?-_]*        {return(LITERAL);}
+[a-zA-Z]_*[a-zA-Z0-9&%$?-_]*        {return(LITERAL);}
 
 ["]([^"\\\n]|\\(.|\n))*["]       {return(STRING);}
 

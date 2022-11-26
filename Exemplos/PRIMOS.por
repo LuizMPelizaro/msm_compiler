@@ -9,16 +9,15 @@ Inicio
       divisores = 0
 
       para Cont2 de 1 ate N faca
-         se (N % Cont2 = 0) ent�o
+         se N == 0 entao
             divisores = divisores + 1
          fimse
       fimpara
-      se (divisores = 2) ent�o
+      se (divisores == 2) entao
          primo = primo + 1
-         escreva(cont1:4)
+         escreva("Teste")
       fimse
    fimpara
-   escreval
    escreval("Total de numeros primos: ", primo)
 
 Fimalgoritmo

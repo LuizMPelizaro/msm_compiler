@@ -1,6 +1,6 @@
 Algoritmo "mediaarit"
 var
-   V1, V2, Media : real ;
+   V1, V2, Media : real
 inicio
 escreva("Qual o primeiro valor? ")
 leia(V1)

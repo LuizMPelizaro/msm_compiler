@@ -8,8 +8,8 @@ inicio
     escreva("Digite o seu nome : ")
     leia(X)
     escreval(" TABOADA DE NOVE (09) ")
-    para i DE 1 ate 10 faca
-        escreval(i," X 9 = ",i * 9)
+    para i de 1 ate 10 faca
+        escreval(" X 9 = ",i)
     fimpara
     
 fimalgoritmo
