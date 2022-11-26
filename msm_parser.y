@@ -89,7 +89,6 @@ variaveis: nome_var DOIS_PONTOS tipo_var
 instrucoes:
         |  instrucoes nome_var assinatura_operador expressao
         |  expressao
-        |  instrucoes nome_var assinatura_operador expressao
         |  escreval
         |  escreva
         |  comando_se
