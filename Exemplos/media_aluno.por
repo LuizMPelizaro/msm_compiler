@@ -16,7 +16,7 @@ inicio
       leia(n3)
       escreva("Digite a quarta nota: ")
       leia(n4)
-      soma <-(n1+n2+n3+n4)
-      media<-(soma/4)
+      soma = (n1+n2+n3+n4)
+      media = (soma/4)
       escreva(media)
 fimalgoritmo

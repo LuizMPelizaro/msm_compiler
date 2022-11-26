@@ -68,7 +68,7 @@ xou                 {return(XOU);}
 ":"                 {return(DOIS_PONTOS);}
 [Vv]erdadeiro | [Ff]also {return(LOGIGO)}
 
-[a-zA-Z][a-zA-Z0-9&%$?-]*        {return(LITERAL);}
+[a-zA-Z][a-zA-Z0-9&%$?-_]*        {return(LITERAL);}
 
 ["]([^"\\\n]|\\(.|\n))*["]       {return(STRING);}
 

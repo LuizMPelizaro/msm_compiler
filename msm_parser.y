@@ -132,20 +132,20 @@ comando_para: instrucoes PARA expressao FACA instrucoes FIMPARA
 alternativa: SENAO instrucoes;
 
 instrucoes:instrucoes 
-        | nome_var assinatura_operador tipo_atribuir
-        | escreval
-        | escreva
-        | comando_se
-        | comando_enquanto
-        | comando_para
-        | leia
+        |  nome_var assinatura_operador tipo_atribuir
+        |  escreval
+        |  escreva
+        |  comando_se
+        |  comando_enquanto
+        |  comando_para
+        |  leia
         ;
 
-escreval: ESCREVAL ABRE_PAR palavras FECHA_PAR;
+escreval: ESCREVAL ABRE_PAR palavras FECHA_PAR instrucoes;
 
-escreva: ESCREVA ABRE_PAR palavras FECHA_PAR;
+escreva: ESCREVA ABRE_PAR palavras FECHA_PAR instrucoes;
 
-leia: LEIA ABRE_PAR nome_var FECHA_PAR;
+leia: LEIA ABRE_PAR nome_var FECHA_PAR instrucoes;
 
 expressao:  palavras assinatura_operador palavras
 	|expressao assinatura_operador palavras
