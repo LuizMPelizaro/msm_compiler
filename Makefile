@@ -9,7 +9,7 @@ comp: clear comp_bison  comp_flex
 	gcc lex.yy.c msm_parser.tab.c -lfl  -o msm_scaner.exe
 
 comp_bison:
-	bison -d -v msm_parser.y
+	bison -d -v msm_parser.y -Wcounterexamples
 
 comp_flex: clear
 	flex  msm_lexer.l

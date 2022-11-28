@@ -15,83 +15,86 @@ void unexpectedCharacter(char c)
 %%
 
 [Aa]lgoritmo        {return(ALGORITMO);}
-[Vv]ar              {return(VAR);}
-[Ii]nicio           {return(INICIO);}
-[Ll]eia             {return(LEIA);}
 [Ff]imalgoritmo     {return(FIMALGORITMO);}
+[Ii]nicio           {return(INICIO);}
+[Vv]ar              {return(VAR);}
 
 
-[Cc]aracter         {return(CARACTER);}
-[Rr]eal             {return(TIPO_REAL);}
-[Ii]nteiro          {return(INTEIRO);}
-[Ll]ogico           {return(TIPO_LOGICO);}
+[Ll]eia             {return(LEIA);}
+[Ee]screva          {return(ESCREVA);}
+[Ee]screval         {return(ESCREVAL);}
+
 
 [Ss]e               {return(SE);}
 [Ee]ntao            {return(ENTAO);}
 [Ss]enao            {return(SENAO);}
+[Ff]imse            {return(FIMSE);}
 
 
 [Pp]ara             {return(PARA);}
 [Dd]e               {return(DE);}
 [Aa]te               {return(ATE);}
-[Ee]nquanto         {return(ENQUANTO);}
 [Ff]aca             {return(FACA);}
-
-[Ff]imse            {return(FIMSE);}
 [Ff]impara          {return(FIMPARA);}
-
+[Ee]nquanto         {return(ENQUANTO);}
 [Ff]imenquanto      {return(FIMENQUANTO);}
 
-[Ee]screva          {return(ESCREVA);}
-[Ee]screval         {return(ESCREVAL);}
+
+[Cc]aracter         {return(TIPO_CARACTER);}
+[Rr]eal             {return(TIPO_REAL);}
+[Ii]nteiro          {return(TIPO_INTEIRO);}
+[Ll]ogico           {return(TIPO_LOGICO);}
+
+
+[Vv]erdadeiro | [Ff]also {return(LOGIGO)}
+
 
 e                   {return(E);}
 ou                  {return(OU);}
 nao                 {return(NAO);}
 xou                 {return(XOU);}
 
+
 =                   {return(ATRIBUIR);}
+
 
 ">"                 {return(MAIOR);}
 ">="                {return(MAIOR_IGUAL);}
 "=="                {return(IGUAL);}
 "<"                 {return(MENOR);}
 "<="                {return(MENOR_IGUAL);}
+"!="                {return(DIFERENTE);}
+
 
 "+"                 {return(SOMA);}
 "-"                 {return(SUB);}
 "*"                 {return(MUL);}
 "/"                 {return(DIV);}
-","                 {return(VIG);}
 
+
+","                 {return(VIG);}
 ";"                 {return(PONTO_VIG);}
 "("                 {return(ABRE_PAR);}
 ")"                 {return(FECHA_PAR);}
 ":"                 {return(DOIS_PONTOS);}
-[Vv]erdadeiro | [Ff]also {return(LOGIGO)}
+
 
 [a-zA-Z]_*[a-zA-Z0-9&%$?-_]*        {return(LITERAL);}
-
 ["]([^"\\\n]|\\(.|\n))*["]       {return(STRING);}
-
 \-?[0-9]+                        {return(NUMERO);}
-
 \-?[0-9]+\.[0-9]+                {return(REAL);}
 \-?[0-9]+\.[0-9]+\E\-?[0-9]+     {return(REAL);}
 
-[ \t\v\n\f]		 { }
 
+[ \t\v\n\f]		 { }
 "/*"                   { BEGIN(COMMENT); }
 <COMMENT>"*/"          { BEGIN(INITIAL); }
 <COMMENT>([^*]|\n)+|.  { }
 <COMMENT><<EOF>>       { }
-
 "//".*\n {}
-
 " "		{ }
 "\t"        {}
 "//"(.)*"\n"	{}
 "\n"		{}
 
 %%
-
