@@ -28,6 +28,6 @@ make run_exemples
 ```
 
 Integrantes do grupo
-Luiz Marcelo Pelizaro
-Eduardo Kesler
-Guilherme Borges
+- Luiz Marcelo Pelizaro
+- Eduardo Kesler
+- Guilherme Borges
