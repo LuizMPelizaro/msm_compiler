@@ -1,15 +1,13 @@
 %option yylineno
 %x COMMENT
 %{
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 #include "msm_parser.tab.h"
-#include <stdio.h>
+#include "TabelaSimbolos.h"
 
-void unexpectedCharacter(char c)
-{
-    printf("unexpected character '%c' on line %d\n", c, yylineno);
-    exit(EXIT_FAILURE);
-}
-
+void yyerror(char* s);
 %}
 
 %%
@@ -79,11 +77,14 @@ xou                 {return(XOU);}
 ":"                 {return(DOIS_PONTOS);}
 
 
-[a-zA-Z]_*[a-zA-Z0-9&%$?-_]*        {return(LITERAL);}
-["]([^"\\\n]|\\(.|\n))*["]       {return(STRING);}
-\-?[0-9]+                        {return(NUMERO);}
-\-?[0-9]+\.[0-9]+                {return(REAL);}
-\-?[0-9]+\.[0-9]+\E\-?[0-9]+     {return(REAL);}
+[a-zA-Z]_*[a-zA-Z0-9&%$?-_]*        {yylval.literal = malloc(sizeof(char) * (strlen(yytext) + 1));
+                                     strcpy(yylval.literal, yytext);
+                                     return LITERAL;
+                                     }
+["]([^"\\\n]|\\(.|\n))*["]       { yylval.caractere = yytext[1]; return(STRING);}
+\-?[0-9]+                        { yylval.int = atoi(yytext); return(NUMERO);}
+\-?[0-9]+\.[0-9]+                {yylval.float = atof(yytext);return(REAL);}
+\-?[0-9]+\.[0-9]+\E\-?[0-9]+     {yylval.float = atof(yytext);return(REAL);}
 
 
 [ \t\v\n\f]		 { }
